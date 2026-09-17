@@ -1,0 +1,21 @@
+# Open http://localhost:8000/graphql (GraphiQL) and paste any of these.
+
+query Dashboard {
+  latestPrices { symbol price ts }
+  vwap(windowMinutes: 5) { symbol vwap volume }
+  orderFlow(windowMinutes: 10) { exchange buyVolume sellVolume imbalance }
+}
+
+query NvdaCandles {
+  candles(symbol: "NVDA", interval: FIVE_MINUTES, limit: 12) {
+    time open high low close volume trades
+  }
+}
+
+query RecentTrades {
+  trades(symbol: "AAPL", limit: 10) { id ts price quantity side exchange }
+}
+
+subscription LiveTicks {
+  priceTicks(symbols: ["AAPL", "TSLA"], intervalSeconds: 1) { symbol price ts }
+}
